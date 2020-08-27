@@ -4,9 +4,16 @@ const FULL_HEART = "♥";
 
 // Your JavaScript code goes here!
 function likeGlyphClick(e) {
+  const heartNode = e.target;
+  let heartCallBack = activateHeart;
+
+  if (heartNode.classList.contains("activated-heart")) {
+    heartCallBack = deActivateHeart;
+  }
+
   mimicServerCall()
     .then((resp) => {
-      activateHeart(e.target);
+      heartCallBack(heartNode);
     })
     .catch(displayError);
 }
